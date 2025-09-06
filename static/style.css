@@ -453,6 +453,32 @@ input div:hover{
     position: absolute;
     animation: carousel 15s alternate infinite;
 }
+@keyframes carousel{
+    0%{
+        left: 0%;
+    }
+    20%{
+        left: 0%;
+    }
+    24%{
+        left: -1560px;
+    }
+    50%{
+        left: -1560px;
+    }
+    54%{
+        left: calc(-1560*2px);
+    }
+    80%{
+        left: calc(-1560*2px);
+    }
+    84%{
+        left: calc(-1560*3px);
+    }
+    100%{
+        left: calc(-1560*3px);
+    }
+}
 .container-1{
     position: absolute;
     z-index: 1;
