@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - {{ user }}</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url("/static/images/bg-wave.png") no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        .profile-container {
+            width: 500px;
+            margin: 80px auto;
+            background: rgba(255, 255, 255, 0.88);
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .profile-image-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007BFF;
+        }
+
+        .edit-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: #007BFF;
+            color: white;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .edit-icon:hover {
+            background: #0056b3;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #007BFF;
+        }
+
+        .info-label {
+            font-weight: bold;
+        }
+
+        .info {
+            margin: 8px 0;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <h2>{{ user_info.email }}</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="profile-image-wrapper">
+                {% if uploaded_image %}
+                    <img src="{{ uploaded_image }}" class="profile-image" alt="Profile Image">
+                {% else %}
+                    <img src="/static/default.png" class="profile-image" alt="Default Profile">
+                {% endif %}
+                
+                <label for="file-upload" class="edit-icon" title="Change Image">
+                    &#9998; <!-- Pencil Icon -->
+                </label>
+                <input id="file-upload" type="file" name="profile_image" onchange="this.form.submit()">
+            </div>
+        </form>
+
+        <div class="info"><span class="info-label">Contact:</span> {{ user_info.contact }}</div>
+        <div class="info"><span class="info-label">Date of Birth:</span> {{ user_info.dob }}</div>
+        <div class="info"><span class="info-label">Gender:</span> {{ user_info.gender }}</div>
+        <div class="info"><span class="info-label">Address:</span> {{ user_info.address }}</div>
+        <div class="info"><span class="info-label">About:</span> {{ user_info.description }}</div>
+
+        <br>
+        <a href="/dashboard?user={{ user }}"><button>Back to Dashboard</button></a>
+    </div>
+
+</body>
+</html>

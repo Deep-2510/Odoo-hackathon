@@ -1,0 +1,9 @@
+Email: dp302817@gmail.com, Contact: 9785478965, DOB: 1999-10-25, Gender: Male
+Email: margi@gmail.com, Contact: 9785478965, DOB: 2004-11-06, Gender: Female
+dp2510@gmail.com,Deep2510@,7418529630,1481-08-07,Male
+dp2510@gmail.com,Deep2510@,7418529630,1481-08-07,Male
+margi@gmail.com,Deep2510@,1234567890,2504-02-11,Female
+dp302817@gmail.com,Deep2510@,7418529630,2250-10-24,Male,alarsa road opp bus-stand,i am an software engineer,
+dp302817@gmail.com,Deep2510@,9785478965,2008-02-25,Male,alarsa road opp bus-stand,i am ann student,
+margisuthar0@gmail.com,Margi@611,7418529630,2005-11-06,Female,spring woods,i am an fresher,margisuthar0gmail.com.jpg
+demo@civictrack.com,12345678,7894561230,2008-02-25,Male,4sf,45ds5sd2v,democivictrack.com.jpg

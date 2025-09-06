@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url("/static/images/bg-wave.png") no-repeat center top;
+        background-size: cover;
+        background-attachment: fixed;
+        background-color: #f0f4f8;
+        min-height: 100vh;
+        color: #333;
+    }
+        header {
+            background: #007bff;
+            color: white;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav {
+            background: #fff;
+            padding: 15px 40px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background: #0056b3;
+            color: white;
+        }
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>About This Website</header>
+    <nav>
+        <a href="{{ url_for('dashboard') }}">Home</a>
+        <a href="{{ url_for('profile', user=user) }}">Profile</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+    <main>
+        <h2>About</h2>
+        <p>Welcome to this website! This platform allows users to register, log in, update their profiles, and upload profile pictures. It is built with Flask for the backend and simple HTML, CSS for the frontend.</p>
+        <p>You can use the navigation bar above to explore your dashboard, view/edit your profile, and securely log out.</p>
+    </main>
+</body>
+</html>
