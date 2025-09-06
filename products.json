@@ -1,0 +1,13 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "title": "books",
+            "category": "books",
+            "description": "the books for the study",
+            "price": "20",
+            "image": "61mWpFmZdbL._AC_UL480_FMwebp_QL65_.webp",
+            "owner": "dp302817@gmail.com"
+        }
+    ]
+}

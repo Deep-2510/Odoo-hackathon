@@ -19,31 +19,35 @@
         header {
             background: #000000ff;
             color: white;
-            padding: 20px 40px;
+            padding: 10px 40px;
             text-align: center;
             font-size: 24px;
             font-weight: bold;
         }
         nav {
-            background: #242637ff;
-            padding: 15px 40px;
-            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        nav a {
-            text-decoration: none;
-            color: #f7f7f7ff;
-            font-weight: bold;
-            font-size: 16px;
-            padding: 8px 15px;
-            border-radius: 6px;
-            transition: background-color 0.3s ease;
-        }
-        nav a:hover {
-            background: #1c1919ff;
-            color: white;
+    background: #fcfcfcff;
+    padding: 15px 40px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;  /* center the menu */
+    gap: 30px;  /* spacing between links */
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;           /* white links */
+    font-weight: bold;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+    background: #1c1919ff;   /* darker background on hover */
+    color: #00aced;          /* light blue hover text */
+}
+
         }
         main {
             max-width: 900px;
@@ -57,6 +61,7 @@
         h2 {
             color: #333;
         }
+        
     </style>
 </head>
 <body>
@@ -71,13 +76,28 @@
                 <img src="./img/amazon_logo.png" alt="#">
                 </a>
             </div>
-            <div class="map flex">
-                <i class="fas fa-map-marker"></i>
-                <div>
-                    <span>Deliver to</span>
-                    <span>INDIA</span>
-                </div>
+            <!--second header for deals of amazon-->
+
+    <div class="second">
+        <div class="second-1">
+            <div>
+                <i class="fas fa-bars"></i>
+                <span>All</span>
             </div>
+        </div>
+        <div class="second-2">
+        <a href="{{ url_for('dashboard') }}">Dashboard</a> 
+
+        <a href="{{ url_for('products') }}">Products</a>
+        <a href="{{ url_for('my_listings') }}">My Listings</a>
+        <a href="{{ url_for('cart') }}">Cart</a>
+        <a href="{{ url_for('purchases') }}">Purchases</a>
+        <a href="{{ url_for('profile', user=user) }}">Profile</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        
+    </div>
+            
             
             <!--code for search bar and other basic information-->
 
@@ -90,23 +110,8 @@
                 <i class="fas fa-search"></i>
             </div>
             <div class="flex right">
-                <div class="flex lang">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/002/399/741/small/american-flag-icon-vector.jpg" alt="">
-                <i class="fas fa-caret-down"></i>
-                </div>
-                <div class="sign">
-                <span>Hello, Sign in </span>
-                    <div class="flex ac">
-                    <span> Account & Lists</span>
-                    <i class="fas -fa-caret down"></i>
-                    </div>
-                </div>
-                <div class="sign">
-                    <span>
-                        Returns
-                    </span>
-                    <span>&Orders</span>
-                </div>
+                
+                
 
                 <!--code for shopping cart -->
 
@@ -118,40 +123,7 @@
         </div>
     </div>
 
-    <!--second header for deals of amazon-->
-
-    <div class="second">
-        <div class="second-1">
-            <div>
-                <i class="fas fa-bars"></i>
-                <span>All</span>
-            </div>
-        </div>
-        <div class="second-2">
-           <nav>
-        <a href="{{ url_for('dashboard', user=user) }}">Home</a>
-        <a href="{{ url_for('profile', user=user) }}">Profile</a>
-        <a href="{{ url_for('about', user=user) }}">About</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
-        <div class="dropdown">
-            <a href="#">Categories <i class="fa fa-caret-down"></i></a>
-            <div class="dropdown-content">
-                <a href="#">Electronics</a>
-                <a href="#">Fashion</a>
-                <a href="#">Home & Kitchen</a>
-                <a href="#">Books</a>
-                <a href="#">Toys & Games</a>
-                <a href="#">Sports & Outdoors</a>
-                <a href="#">Health & Personal Care</a>
-                <a href="#">Automotive</a>
-                <a href="#">Grocery & Gourmet Food</a>
-            </div>
-    </nav>
-        </div>
-        <div class="second-3">
-            <span>Shop for Fashion </span>
-        </div>
-    </div>
+    
     </header>
     <section class="sec-1">
         <div class="container">

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Product</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header>Add New Product</header>
+  <nav>
+<a href="{{ url_for('dashboard') }}">Dashboard</a> 
+
+    <a href="{{ url_for('products') }}">Products</a>
+    <a href="{{ url_for('my_listings') }}">My Listings</a>
+    <a href="{{ url_for('cart') }}">Cart</a>
+    <a href="{{ url_for('purchases') }}">Purchases</a>
+    <a href="{{ url_for('profile', user=user) }}">Profile</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </nav>
+
+  <main>
+    <h2>Create Product Listing</h2>
+    <form method="POST" enctype="multipart/form-data" class="form-card">
+      <label>Product Title</label>
+      <input type="text" name="title" required>
+
+      <label>Category</label>
+      <select name="category" required>
+        {% for cat in categories %}
+          <option value="{{ cat }}">{{ cat }}</option>
+        {% endfor %}
+      </select>
+
+      <label>Description</label>
+      <textarea name="description" rows="3" required></textarea>
+
+      <label>Price</label>
+      <input type="number" name="price" required>
+
+      <label>Product Image</label>
+      <input type="file" name="image">
+
+      <button type="submit">Submit Listing</button>
+    </form>
+  </main>
+</body>
+</html>
