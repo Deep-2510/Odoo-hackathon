@@ -149,7 +149,10 @@ def profile(user):
         uploaded_image=uploaded_image,
         products=my_products
     )
-
+@app.route('/category/<name>')
+def category(name):
+    # Render a template for the category, e.g., category.html
+    return render_template('category.html', category=name)
 # -----------------------------
 # About
 # -----------------------------
@@ -268,6 +271,10 @@ def purchases():
     purchases = load_json(PURCHASE_FILE).get(user, [])
     return render_template('purchases.html', purchases=purchases, user=user)
 
+@app.route('/elec')
+def elec():
+    return render_template('elec.html')
+
 # -----------------------------
 # Logout
 # -----------------------------
@@ -276,7 +283,17 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
 
-
+# -----------------------------
+# Search
+# -----------------------------
+@app.route('/search')
+def search():
+    query = request.args.get('q', '')
+    if query:
+        results = Listing.query.filter(Listing.name.ilike(f"%{query}%")).all()
+    else:
+        results = []
+    return render_template('search_results.html', results=results, query=query)
 
 # -----------------------------
 # Run App

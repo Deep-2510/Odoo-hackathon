@@ -115,17 +115,27 @@
             </div>
      
     </a>
+    <nav style="display: flex; align-items: center; background: #fff; padding: 16px;">
+    <!-- Other nav links ... -->
+    <div style="margin-left: auto; position: relative;">
+        <button id="menu-btn" style="background: none; border: none; cursor: pointer;">
+            <i class="fas fa-bars" style="font-size: 2rem; color: #232f3e;"></i>
+        </button>
+        <div id="menu-dropdown" style="display: none; position: absolute; right: 0; top: 40px; background: #fff; border: 1px solid #eee; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-width: 160px; z-index: 100;">
+           <a href="{{ url_for('dashboard') }} "style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;1">Dashboard</a>
+    <a href="{{ url_for('products') }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">Products</a>
+    <a href="{{ url_for('my_listings') }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">My Listings</a>
+    <a href="{{ url_for('purchases') }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">Purchases</a>
+    <a href="{{ url_for('profile', user=user) }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">Profile</a>
+    <a href="{{ url_for('logout') }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">Logout</a>
+  
+            </div>
+    </div>
+</nav>
   </header>
 
   <!-- Secondary Navigation -->
-  <nav>
-    <a href="{{ url_for('dashboard') }}">Dashboard</a>
-    <a href="{{ url_for('products') }}">Products</a>
-    <a href="{{ url_for('my_listings') }}">My Listings</a>
-    <a href="{{ url_for('purchases') }}">Purchases</a>
-    <a href="{{ url_for('profile', user=user) }}">Profile</a>
-    <a href="{{ url_for('logout') }}">Logout</a>
-  </nav>
+  
                 
             </div>
         </div>
@@ -153,24 +163,26 @@
                                 <span>Keyboard</span>
                             </div>
                             <div>
-                                <img src="/static/MOUSE/41xAn0iwc6L._AC_UY218_.jpg" alt="">
+                                <img src="/static/MOUSE/51yzr0iaXzL._AC_UL640_QL65_.jpg" alt="">
                                 <span>Mouse</span>
                             </div>
                             <div>
                                <a href="/img/Amazon.com _ gaming chairs.html">
                                 
-                                <img src="./img/gameset/Fuji_Quad_Chair_1x._SY116_CB667159060_.jpg" alt="">
+                                <img src="/static/GAMINGCHAIR/61jg3OeHINL._AC_UL320_.jpg " alt="">
                                 <span>Chairs</span> 
                                 </a>
                                 
                             </div>
-                            <a href="/img/gameing/index.html">see more</a>
+                           <a href="{{ url_for('elec') }}" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
+    See More
+</a>
                         </div>  
                     </div>
                     
                     <!--create the box for offer section of items-->
                     <div class="box">
-                        <h3>Under ₹699|Amazon brands</h3>
+                        <h3>Under ₹699|Amazon brands]</h3>
                         <div class="box-a">
                             <div>
                                 <img src="/img/sari (1).jpg" alt="">
@@ -190,7 +202,7 @@
                                 <span> trendy tops & dresses</span>
                             </div>
                         </div>
-                        <a href="#">see more</a>
+                      
                         
                     </div>
 
@@ -216,7 +228,7 @@
                                 <img src="./img/deal/71Gj122xuVL._AC_UL640_QL65_.jpg" alt="">
                                 <span>PC Monitor</span>
                             </div>
-                            <a href="#">see more</a>
+                            
                         </div>
                     </div>
                     
@@ -227,9 +239,11 @@
                     <div class="box box-c">
                         <h3>Smart Watch</h3>
                         <div>
-                            <img src="/img/00000.webp" alt="">
+                            <img src="/static/watch/61ZtqtvoD2L._AC_UY327_FMwebp_QL65_.webp" alt="">
                         </div>
-                        <a href="#">see more</a>
+                      <a href="{{ url_for('elec') }}" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
+    See More
+</a>
                         
                     </div>
 
@@ -237,29 +251,33 @@
                     <div class="box box-c">
                         <h3>Laptop and Accessories</h3>
                         <div>
-                            <img src="/img/0.jpg" alt="">
-                        </div>
-                        <a href="#">see more</a>
-                     
+                            <img src="/static/LAPTOP/71hC42cKbsL._AC_UY218_.jpg" alt="">
+                        <a href="{{ url_for('elec') }}" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
+    See More
+</a>
                     </div>
 
                     <!--section of luggage bages-->
                     <div class="box box-c">
-                        <h3>Luggage bage</h3>
+                        <h3>phone</h3>
                         <div>
-                            <img src="/img/0000.png" alt="">
+                            <img src="/STATIC/PHONES/81AyOlAxwuL._AC_UY218_.jpg" alt="">
                         </div>
-                        <a href="#">see more</a>
+                       <a href="{{ url_for('elec') }}" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
+    See More
+</a>
                         
                     </div>
 
                     <!--section of fashion of ladies-->
                     <div class="box box-c">
-                        <h3>Fashion Trends </h3>
+                        <h3>gaming chair </h3>
                         <div>
-                            <img src="/img/00.jpg" alt="">
+                            <img src="/static/GAMINGCHAIR/61G6l2K+pEL._AC_PT0_BL0_SX320_SY720_.jpg" alt="">
                         </div>
-                        <a href="#">see more</a>
+                       <a href="{{ url_for('elec') }}" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
+    See More
+</a>
                         
                     </div>
                     
@@ -372,7 +390,7 @@
             <!--product card price 2 mobile-->
             <div class="product-card">
                 <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/41yHj1h1+gL._SR480,440_.jpg" alt="">
+                    <img src="/static/MOUSE/51czxrySrVL._AC_UY218_.jpg" alt="">
                 </div>
                 <div class="product-offer">
                     <p>25% off</p> <span>deal</span>

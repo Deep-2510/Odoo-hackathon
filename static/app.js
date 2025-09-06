@@ -14,7 +14,15 @@ leftbtn.addEventListener('click',function(event){
     conent.scrollLeft -=1100;
     event.preventDefault();
 });
-
+document.getElementById('menu-btn').addEventListener('click', function() {
+    const dropdown = document.getElementById('menu-dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+});
+window.addEventListener('click', function(e) {
+    if (!document.getElementById('menu-btn').contains(e.target)) {
+        document.getElementById('menu-dropdown').style.display = 'none';
+    }
+});
 const leftbtn1 = document.querySelector(".btn-1b");
 const rightbtn1 = document.querySelector(".btn-1a");
 

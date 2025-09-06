@@ -87,8 +87,7 @@
 <body>
 
     <div class="profile-container">
-        <h2>{{ user_info.email }}</h2>
-
+        
         <form method="POST" enctype="multipart/form-data">
             <div class="profile-image-wrapper">
                 {% if uploaded_image %}
@@ -111,6 +110,14 @@
         <div class="info"><span class="info-label">About:</span> {{ user_info.description }}</div>
 
         <br>
+        <div class="profile-actions" style="display: flex; gap: 24px; margin-top: 24px;">
+        <a href="/products.html" style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px; background: #232f3e; color: #fff; text-decoration: none; border-radius: 12px; font-size: 1.1rem; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            My Listing
+        </a>
+        <a href="/purchases.html" style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px; background: #232f3e; color: #fff; text-decoration: none; border-radius: 12px; font-size: 1.1rem; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            My Purchases
+        </a>
+    </div>
         <h2 class="text-xl font-bold mt-8 mb-4">My Added Products</h2>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
   {% for product in products %}

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electronic Card</title>
+  <link rel="stylesheet" href="/static/ele.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 10px 0;
+      line-height: 1.4;
+    }
+
+    .sec-1 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .Electronic-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .Electronic-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .Electronic-img img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .Electronic p {
+      margin: 5px 0;
+      color: #007600;
+      font-weight: bold;
+    }
+
+    .Electronic span {
+      background: #ffd814;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+
+    .Electronic-price {
+      margin-top: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #B12704;
+    }
+
+    .strike {
+      text-decoration: line-through;
+      font-size: 14px;
+      color: #565959;
+    }
+
+    /* Rating Section */
+    .rating {
+      margin: 8px 0;
+      color: #ffa41c;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Electronic Products Section -->
+  <section class="sec-1">
+
+    <div class="Electronic-card">
+      <div class="Electronic-img">
+        <img src="/static/FRIDGE/61GelOnsPKL._AC_UL640_QL65_.jpg" alt="Microwave">
+      </div>
+      <div class="Electronic">
+        <h4>IFB EM131A5C-BS Countertop Microwave Oven 1.2 Cu Ft, Easy Clean, 1100W</h4>
+        <div class="rating">⭐⭐⭐⭐☆ (4.2/5)</div>
+        <p>20% off <span>Deal</span></p>
+      </div>
+      <p class="Electronic-price">₹7,999 <span class="strike">₹9,999</span></p>
+    </div>
+
+    <div class="Electronic-card">
+      <div class="Electronic-img">
+        <img src="/static/slider/51TJJNnBGeL._AC_SY200_.jpg" alt="Product">
+      </div>
+      <div class="Electronic">
+        <h4>PRESS ECO Mode Easy Clean 110W</h4>
+        <div class="rating">⭐⭐⭐☆☆ (3.5/5)</div>
+        <p>20% off <span>Deal</span></p>
+      </div>
+      <p class="Electronic-price">₹7,999 <span class="strike">₹9,999</span></p>
+    </div>
+
+    <div class="Electronic-card">
+      <div class="Electronic-img">
+        <img src="/static/slider/61bxFhTRWfL._AC_UY218_.jpg" alt="Product">
+      </div>
+      <div class="Electronic">
+        <h4>IFB EM131A5C-BS Countertop Microwave Oven Smart Humidity Sensor</h4>
+        <div class="rating">⭐⭐⭐⭐⭐ (4.7/5)</div>
+        <p>20% off <span>Deal</span></p>
+      </div>
+      <p class="Electronic-price">₹7,999 <span class="strike">₹9,999</span></p>
+    </div>
+
+    <div class="Electronic-card">
+      <div class="Electronic-img">
+        <img src="/static/GAMINGCHAIR/61jg3OeHINL._AC_UL320_.jpg" alt="Product">
+      </div>
+      <div class="Electronic">
+        <h4>Microwave Oven with Auto ECO Mode, Easy Clean Interior</h4>
+        <div class="rating">⭐⭐⭐⭐☆ (4.0/5)</div>
+        <p>20% off <span>Deal</span></p>
+      </div>
+      <p class="Electronic-price">₹7,999 <span class="strike">₹9,999</span></p>
+    </div>
+
+    <div class="Electronic-card">
+      <div class="Electronic-img">
+        <img src="/static/LAPTOP/61eA9PkZ07L._AC_UL320_.jpg" alt="Laptop" style="width:120px;">
+      </div>
+      <div class="Electronic">
+        <h4>Laptop</h4>
+        <div class="rating">⭐⭐⭐☆☆ (3.8/5)</div>
+        <p>20% off <span>Deal</span></p>
+      </div>
+      <p class="Electronic-price">₹7,999 <span class="strike">₹9,999</span></p>
+    </div>
+
+  </section>
+
+  
+
+  <ul id="cart-items"></ul>
+<div id="cart-summary"></div>
+<script>
+function getCart() {
+    return JSON.parse(localStorage.getItem('cart')) || {};
+}
+function saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+function addToCart(product, price, image, about) {
+    let cart = getCart();
+    if (cart[product]) {
+        cart[product].qty += 1;
+    } else {
+        cart[product] = { price: price, qty: 1, image: image, about: about };
+    }
+    saveCart(cart);
+}
+document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const product = this.getAttribute('data-product');
+        const price = parseInt(this.getAttribute('data-price'));
+        const image = this.getAttribute('data-image');
+        const about = this.getAttribute('data-about');
+        addToCart(product, price, image, about);
+        alert(product + " added to cart!");
+    });
+});
+function removeFromCart(product) {
+    let cart = getCart();
+    if (cart[product]) {
+        cart[product].qty -= 1;
+        if (cart[product].qty <= 0) {
+            delete cart[product];
+        }
+        saveCart(cart);
+        renderCart();
+    }
+}
+function deleteFromCart(product) {
+    let cart = getCart();
+    if (cart[product]) {
+        delete cart[product];
+        saveCart(cart);
+        renderCart();
+    }
+}
+function buyProduct(product) {
+    alert("Purchased: " + product);
+    deleteFromCart(product);
+}
+function renderCart() {
+    const cart = getCart();
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    let total = 0;
+    let itemCount = 0;
+    Object.keys(cart).forEach(product => {
+        const item = cart[product];
+        total += item.price * item.qty;
+        itemCount += item.qty;
+        const li = document.createElement('li');
+        li.style.display = 'flex';
+        li.style.alignItems = 'center';
+        li.innerHTML = `
+            <img src="${item.image}" alt="${product}" style="width:80px; height:80px; object-fit:contain; border-radius:6px; margin-right:24px;">
+            <div style="flex:1;">
+                <h4>${product}</h4>
+                <p>Price: ₹${item.price}</p>
+                <p>Quantity: ${item.qty}</p>
+                <p>About: ${item.about}</p>
+            </div>
+            <button onclick="removeFromCart('${product}')">-</button>
+            <button onclick="deleteFromCart('${product}')">Delete</button>
+            <button onclick="buyProduct('${product}')">Buy</button>
+        `;
+        cartItems.appendChild(li);
+    });
+    document.getElementById('cart-summary').textContent = `Total: ₹${total} | Items: ${itemCount}`;
+}
+renderCart();
+</script>
+
+</body>
+</html>

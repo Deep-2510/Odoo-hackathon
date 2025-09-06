@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Search Results</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <h2>Search Results for "{{ query }}"</h2>
+    {% if results %}
+        <ul>
+        {% for item in results %}
+            <li style="margin-bottom:24px;">
+                <img src="{{ item.image }}" alt="{{ item.name }}" style="width:80px; height:80px; object-fit:contain;">
+                <strong>{{ item.name }}</strong> - ₹{{ item.price }}<br>
+                <span>{{ item.about }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No items found.</p>
+    {% endif %}
+</body>
+</html>
