@@ -221,6 +221,7 @@ input div:hover{
     align-items: center;
     color: white;
     overflow: hidden;
+    padding: 10px 20px;
 }
 .second ul{
     align-items: center;
@@ -260,6 +261,8 @@ input div:hover{
     flex: 0.74;
     display: flex;
     justify-content: flex-start;
+    margin: 10px;
+    padding: 20px;
 }
 .second-3{
     flex: 0.2;

@@ -111,6 +111,19 @@
         <div class="info"><span class="info-label">About:</span> {{ user_info.description }}</div>
 
         <br>
+        <h2 class="text-xl font-bold mt-8 mb-4">My Added Products</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {% for product in products %}
+  <div class="bg-gray-800 p-4 rounded-lg shadow">
+    <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.title }}" class="w-full h-32 object-cover rounded mb-2">
+    <h3 class="text-lg font-semibold">{{ product.title }}</h3>
+    <p class="text-sm text-gray-400">Price: ${{ product.price }}</p>
+    <p class="text-sm text-gray-400">Category: {{ product.category }}</p>
+  </div>
+  {% else %}
+  <p class="text-gray-400">You haven’t added any products yet.</p>
+  {% endfor %}
+</div>
         <a href="/dashboard?user={{ user }}"><button>Back to Dashboard</button></a>
     </div>
 

@@ -109,6 +109,7 @@ def profile(user):
     if current_user is None:
         return "❌ No user data found."
 
+    # Handle profile image upload
     if request.method == 'POST':
         file = request.files['profile_image']
         if file:
@@ -126,6 +127,7 @@ def profile(user):
     if os.path.exists(image_path):
         uploaded_image = full_image_url
 
+    # User basic info
     user_info = {
         'email': current_user[0],
         'contact': current_user[2],
@@ -135,7 +137,18 @@ def profile(user):
         'description': current_user[6],
     }
 
-    return render_template('profile.html', user=user, user_info=user_info, uploaded_image=uploaded_image)
+    # 🔥 Fetch products added by this user
+    products = load_json(PRODUCTS_FILE).get("products", [])
+    my_products = [p for p in products if p.get("owner") == user]
+
+    # Send products to template too
+    return render_template(
+        'profile.html',
+        user=user,
+        user_info=user_info,
+        uploaded_image=uploaded_image,
+        products=my_products
+    )
 
 # -----------------------------
 # About
@@ -262,6 +275,8 @@ def purchases():
 def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
+
+
 
 # -----------------------------
 # Run App

@@ -6,119 +6,128 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="/static/style.css" />
-    <style>
-        body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-       
-        background-color: #f2f7eeff;
-        min-height: 100vh;
-        color: #333;
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f7eeff;
+      min-height: 100vh;
+      color: #333;
     }
-        header {
-            background: #000000ff;
-            color: white;
-            padding: 10px 40px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        nav {
-    background: #fcfcfcff;
-    padding: 15px 40px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: center;  /* center the menu */
-    gap: 30px;  /* spacing between links */
-}
 
-nav a {
-    text-decoration: none;
-    color: #ffffff;           /* white links */
-    font-weight: bold;
-    font-size: 16px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+    /* Top black bar */
+    header {
+      background: #000000;
+      color: white;
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-nav a:hover {
-    background: #1c1919ff;   /* darker background on hover */
-    color: #00aced;          /* light blue hover text */
-}
+    header .logo img {
+      height: 40px;
+    }
 
-        }
-        main {
-            max-width: 900px;
-            margin: 30px auto;
-            background: white;
-            padding: 30px 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        h2 {
-            color: #333;
-        }
-        
-    </style>
+    /* Search bar */
+    .search-bar {
+      display: flex;
+      flex: 1;
+      max-width: 500px;
+      margin: 0 20px;
+      background: white;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #ccc;
+    }
+    .search-bar input {
+      flex: 1;
+      border: none;
+      padding: 8px 10px;
+      outline: none;
+    }
+    .search-bar button {
+      background: #febd69;
+      border: none;
+      padding: 0 15px;
+      cursor: pointer;
+    }
+
+    /* Cart */
+    .cart {
+      display: flex;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      gap: 5px;
+    }
+    .cart svg {
+      height: 24px;
+      width: 24px;
+    }
+
+    /* Secondary nav */
+    nav {
+      background: #232f3e;
+      padding: 12px 30px;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 15px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #febd69;
+    }
+  </style>
 </head>
 <body>
-    <header></header>
-    
-   <header>
-        <!--code for logo and map-->
 
-        <div class="first">
-            <div class="felx logo">
-                <a href="#">
-                <img src="./img/amazon_logo.png" alt="#">
-                </a>
-            </div>
-            <!--second header for deals of amazon-->
-
-    <div class="second">
-        <div class="second-1">
-            <div>
-                <i class="fas fa-bars"></i>
-                <span>All</span>
-            </div>
-        </div>
-        <div class="second-2">
-        <a href="{{ url_for('dashboard') }}">Dashboard</a> 
-
-        <a href="{{ url_for('products') }}">Products</a>
-        <a href="{{ url_for('my_listings') }}">My Listings</a>
-        <a href="{{ url_for('cart') }}">Cart</a>
-        <a href="{{ url_for('purchases') }}">Purchases</a>
-        <a href="{{ url_for('profile', user=user) }}">Profile</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
-        </div>
-        
+  <!-- Main Header -->
+  <header>
+    <!-- Logo -->
+    <div class="logo">
+      <a href="{{ url_for('dashboard') }}">
+        <img src="./img/amazon_logo.png" alt="Logo">
+      </a>
     </div>
-            
-            
-            <!--code for search bar and other basic information-->
 
-            <div class="flex input ">
-                <div>
-                <span>All</span>
-                <i class="fas fa-caret-down"></i>
-                </div>
-                <input type="text" name="" id="">
-                <i class="fas fa-search"></i>
-            </div>
-            <div class="flex right">
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" placeholder="Search products...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+
+    <!-- Cart -->
+    <a href="{{ url_for('cart') }}" class="cart">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8h13.2L17 13M7 13l4-8m0 0l4 8" />
+      </svg>
+     
+    </a>
+  </header>
+
+  <!-- Secondary Navigation -->
+  <nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('products') }}">Products</a>
+    <a href="{{ url_for('my_listings') }}">My Listings</a>
+    <a href="{{ url_for('purchases') }}">Purchases</a>
+    <a href="{{ url_for('profile', user=user) }}">Profile</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </nav>
                 
-                
-
-                <!--code for shopping cart -->
-
-                <div class="flex cart">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="ca">Cart</span>
-                <p>0</p>
             </div>
         </div>
     </div>
@@ -201,7 +210,7 @@ nav a:hover {
                                 <span>Lenova Laptop</span>
                             </div>
                             <div>
-                                <img src="/static/PHONES/71zg6RAa78L._AC_UY218_.jpg" alt="">
+                                <img src="/STATIC/PHONES/" alt="">
                                 <span>Android Tablet</span>
                             </div>
                             <div>
@@ -376,6 +385,7 @@ nav a:hover {
                 <span>₹39999</span>
                 <p class="product-price">  List Price:₹49999</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="39999">Add to Cart</button>
             </div>
 
             <!--product card price 2 mobile-->
@@ -389,6 +399,7 @@ nav a:hover {
                 <span>₹34999</span>
                 <p class="product-price">  List Price:₹49999</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="34999">Add to Cart</button>
             </div>
 
             <!--product card price 3 laptop -->
@@ -402,6 +413,7 @@ nav a:hover {
                 <span>₹99999</span>
                 <p class="product-price">  List Price:₹139999</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="99999">Add to Cart</button>
             </div>
 
             <!--product card price 4 lagguage-->
@@ -415,6 +427,7 @@ nav a:hover {
                 <span>₹24999</span>
                 <p class="product-price">  List Price:₹39999</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="24999">Add to Cart</button>
             </div>
 
             <!--product card price 5 mobile-->
@@ -428,6 +441,7 @@ nav a:hover {
                 <span>₹29999</span>
                 <p class="product-price">  List Price:₹45999</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="29999">Add to Cart</button>
             </div>
 
             <!--product card price 6 earbuds -->
@@ -441,6 +455,7 @@ nav a:hover {
                 <span>₹5999</span>
                 <p class="product-price">  List Price:₹7999</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="5999">Add to Cart</button>
             </div>
 
             <!--product card price 7  freige-->
@@ -454,6 +469,7 @@ nav a:hover {
                 <span>₹57999</span>
                 <p class="product-price">  List Price:₹69999</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="57999">Add to Cart</button>
             </div>
 
             <!--product card price 8  ears buds-->
@@ -467,6 +483,7 @@ nav a:hover {
                 <span>₹3999</span>
                 <p class="product-price">  List Price:₹4500</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="3999">Add to Cart</button>
             </div>
 
             <!--product card price 9 -->
@@ -480,6 +497,7 @@ nav a:hover {
                 <span>₹1999</span>
                 <p class="product-price">  List Price:₹2500</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="1999">Add to Cart</button>
             </div>
 
             <!--product card price 10x-->
@@ -493,6 +511,7 @@ nav a:hover {
                 <span>₹5999</span>
                 <p class="product-price">  List Price:₹7500</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="5999">Add to Cart</button>
             </div>
             <!--product card price 11x-->
             <div class="product-card">
@@ -505,6 +524,7 @@ nav a:hover {
                 <span>₹5999</span>
                 <p class="product-price">  List Price:₹7500</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="5999">Add to Cart</button>
             </div>
 
             <!--product card price 12-->
@@ -518,6 +538,7 @@ nav a:hover {
                 <span>₹5999</span>
                 <p class="product-price">  List Price:₹7500</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="5999">Add to Cart</button>
             </div>
 
             <!--product card price 13-->
@@ -531,6 +552,7 @@ nav a:hover {
                 <span>₹5999</span>
                 <p class="product-price">  List Price:₹7500</p>
                 <h4>This is the best for you</h4>
+                <button class="add-to-cart-btn" data-product="Product Name" data-price="5999">Add to Cart</button>
             </div>
 
 
@@ -593,3 +615,78 @@ nav a:hover {
         <script src="/static/app.js"></script>    
 </body>
 </html>
+
+<!-- Cart Modal -->
+<div id="cart-modal" style="display:none; position:fixed; top:10%; right:10%; background:#fff; border:1px solid #ccc; padding:20px; z-index:9999;">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <button onclick="closeCart()">Close</button>
+</div>
+
+<script>
+let cart = {};
+
+function addToCart(product, price) {
+    if (cart[product]) {
+        cart[product].qty += 1;
+    } else {
+        cart[product] = { price: price, qty: 1 };
+    }
+    renderCart();
+}
+
+function removeFromCart(product) {
+    if (cart[product]) {
+        cart[product].qty -= 1;
+        if (cart[product].qty <= 0) {
+            delete cart[product];
+        }
+        renderCart();
+    }
+}
+
+function deleteFromCart(product) {
+    if (cart[product]) {
+        delete cart[product];
+        renderCart();
+    }
+}
+
+function renderCart() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    let total = 0;
+    Object.keys(cart).forEach(product => {
+        const item = cart[product];
+        total += item.price * item.qty;
+        const li = document.createElement('li');
+        li.innerHTML = `
+            ${product} - ₹${item.price} x ${item.qty}
+            <button onclick="addToCart('${product}', ${item.price})">+</button>
+            <button onclick="removeFromCart('${product}')">-</button>
+            <button onclick="deleteFromCart('${product}')">Delete</button>
+        `;
+        cartItems.appendChild(li);
+    });
+    // Show total price below the cart items
+    const totalLi = document.createElement('li');
+    totalLi.style.fontWeight = 'bold';
+    totalLi.innerHTML = `Total: ₹${total}`;
+    cartItems.appendChild(totalLi);
+
+    document.getElementById('cart-modal').style.display = 'block';
+}
+
+// Attach event listeners to Add to Cart buttons
+document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const product = this.getAttribute('data-product');
+        const price = parseInt(this.getAttribute('data-price'));
+        addToCart(product, price);
+    });
+});
+
+function closeCart() {
+    document.getElementById('cart-modal').style.display = 'none';
+}
+</script>
