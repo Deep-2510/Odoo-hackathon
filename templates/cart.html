@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f7eeff;
+            margin: 0;
+            padding: 0;
+        }
+        .cart-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 32px;
+        }
+        .cart-title {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .cart-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 16px 0;
+        }
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 6px;
+            margin-right: 24px;
+            background: #fafafa;
+            border: 1px solid #eee;
+        }
+        .cart-details {
+            flex: 1;
+        }
+        .cart-details h4 {
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+        }
+        .cart-details p {
+            margin: 0 0 4px 0;
+            color: #555;
+        }
+        .cart-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cart-actions button {
+            background: #232f3e;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .cart-actions button:hover {
+            background: #febd69;
+            color: #232f3e;
+        }
+        .cart-summary {
+            text-align: right;
+            font-size: 1.2rem;
+            margin-top: 24px;
+            font-weight: bold;
+        }
+        .empty-cart {
+            text-align: center;
+            color: #888;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <div class="cart-title">Your Shopping Cart</div>
+        <ul id="cart-items" class="cart-list"></ul>
+        <div id="cart-summary" class="cart-summary"></div>
+    </div>
+    <script>
+    function getCart() {
+        return JSON.parse(localStorage.getItem('cart')) || {};
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function removeFromCart(product) {
+        let cart = getCart();
+        if (cart[product]) {
+            cart[product].qty -= 1;
+            if (cart[product].qty <= 0) {
+                delete cart[product];
+            }
+            saveCart(cart);
+            renderCart();
+        }
+    }
+
+    function addToCart(product, price, image) {
+        let cart = getCart();
+        if (cart[product]) {
+            cart[product].qty += 1;
+        } else {
+            cart[product] = { price: price, qty: 1, image: image };
+        }
+        saveCart(cart);
+        renderCart();
+    }
+
+    function deleteFromCart(product) {
+        let cart = getCart();
+        if (cart[product]) {
+            delete cart[product];
+            saveCart(cart);
+            renderCart();
+        }
+    }
+
+    function renderCart() {
+        const cart = getCart();
+        const cartItems = document.getElementById('cart-items');
+        cartItems.innerHTML = '';
+        let total = 0;
+        let itemCount = 0;
+        const products = Object.keys(cart);
+        if (products.length === 0) {
+            cartItems.innerHTML = '<div class="empty-cart">Your cart is empty.</div>';
+            document.getElementById('cart-summary').textContent = '';
+            return;
+        }
+        products.forEach(product => {
+            const item = cart[product];
+            total += item.price * item.qty;
+            itemCount += item.qty;
+            const li = document.createElement('li');
+            li.className = 'cart-item';
+            li.innerHTML = `
+                <img src="${item.image}" alt="${product}" style="width:80px; height:80px; object-fit:contain; border-radius:6px; margin-right:24px;">
+                <div class="cart-details">
+                    <h4>${product}</h4>
+                    <p>Price: ₹${item.price}</p>
+                    <p>Quantity: ${item.qty}</p>
+                </div>
+                <div class="cart-actions">
+                    <button onclick="addToCart('${product}', ${item.price}, '${item.image}')">+</button>
+                    <button onclick="removeFromCart('${product}')">-</button>
+                    <button onclick="deleteFromCart('${product}')">Delete</button>
+                </div>
+            `;
+            cartItems.appendChild(li);
+        });
+        document.getElementById('cart-summary').textContent = `Total: ₹${total} | Items: ${itemCount}`;
+    }
+
+    renderCart();
+    </script>
+</body>
+</html>

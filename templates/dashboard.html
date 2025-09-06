@@ -97,7 +97,7 @@
     <!-- Logo -->
     <div class="logo">
       <a href="{{ url_for('dashboard') }}">
-        <img src="./img/amazon_logo.png" alt="Logo">
+        <img src="/static/images/logo.png" alt="Logo">
       </a>
     </div>
 
@@ -109,11 +109,10 @@
 
     <!-- Cart -->
     <a href="{{ url_for('cart') }}" class="cart">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-           viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8h13.2L17 13M7 13l4-8m0 0l4 8" />
-      </svg>
+      <div class="flex cart">
+                <i class="fas fa-shopping-cart"></i>
+                
+            </div>
      
     </a>
   </header>
@@ -362,7 +361,12 @@
                 <span>₹39999</span>
                 <p class="product-price">  List Price:₹49999</p>
                 <h4>This is the best for you</h4>
-                <button class="add-to-cart-btn" data-product="Product Name" data-price="39999">Add to Cart</button>
+                <button class="add-to-cart-btn"
+    data-product="Laptop"
+    data-price="39999"
+    data-image="/static/LAPTOP/61eA9PkZ07L._AC_UL320_.jpg">
+    Add to Cart
+</button>
             </div>
 
             <!--product card price 2 mobile-->
@@ -382,7 +386,7 @@
             <!--product card price 3 laptop -->
             <div class="product-card">
                 <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/41DQBVvUbUL._SR480,440_.jpg" alt="">
+                    <img src="/static/AC/41D8PibHJjL._AC_UY218_.jpg" alt="">
                 </div>
                 <div class="product-offer">
                     <p>25% off</p> <span>deal</span>
@@ -452,7 +456,7 @@
             <!--product card price 8  ears buds-->
             <div class="product-card">
                 <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/514m1VhSUUL._AC_UL165_SR165,165_.jpg" alt="">
+                    <img src="/static/LAPTOP/71FXHAM" alt="">
                 </div>
                 <div class="product-offer">
                     <p>15% off</p> <span>deal</span>
@@ -601,69 +605,73 @@
 </div>
 
 <script>
-let cart = {};
+function getCart() {
+    return JSON.parse(localStorage.getItem('cart')) || {};
+}
 
-function addToCart(product, price) {
+function saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function addToCart(product, price, image) {
+    let cart = getCart();
     if (cart[product]) {
         cart[product].qty += 1;
     } else {
-        cart[product] = { price: price, qty: 1 };
+        cart[product] = { price: price, qty: 1, image: image };
     }
+    saveCart(cart);
     renderCart();
 }
 
-function removeFromCart(product) {
-    if (cart[product]) {
-        cart[product].qty -= 1;
-        if (cart[product].qty <= 0) {
-            delete cart[product];
-        }
-        renderCart();
-    }
-}
-
-function deleteFromCart(product) {
-    if (cart[product]) {
-        delete cart[product];
-        renderCart();
-    }
-}
-
-function renderCart() {
-    const cartItems = document.getElementById('cart-items');
-    cartItems.innerHTML = '';
-    let total = 0;
-    Object.keys(cart).forEach(product => {
-        const item = cart[product];
-        total += item.price * item.qty;
-        const li = document.createElement('li');
-        li.innerHTML = `
-            ${product} - ₹${item.price} x ${item.qty}
-            <button onclick="addToCart('${product}', ${item.price})">+</button>
-            <button onclick="removeFromCart('${product}')">-</button>
-            <button onclick="deleteFromCart('${product}')">Delete</button>
-        `;
-        cartItems.appendChild(li);
-    });
-    // Show total price below the cart items
-    const totalLi = document.createElement('li');
-    totalLi.style.fontWeight = 'bold';
-    totalLi.innerHTML = `Total: ₹${total}`;
-    cartItems.appendChild(totalLi);
-
-    document.getElementById('cart-modal').style.display = 'block';
-}
-
-// Attach event listeners to Add to Cart buttons
 document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         const product = this.getAttribute('data-product');
         const price = parseInt(this.getAttribute('data-price'));
-        addToCart(product, price);
+        const image = this.getAttribute('data-image');
+        addToCart(product, price, image);
     });
 });
+
+function renderCart() {
+    const cart = getCart();
+    const cartItemsContainer = document.getElementById('cart-items');
+    cartItemsContainer.innerHTML = '';
+
+    for (let product in cart) {
+        const item = cart[product];
+        let li = document.createElement('li');
+        li.innerHTML = `
+            <img src="${item.image}" alt="${product}" style="width:80px; height:80px; object-fit:contain; border-radius:6px; margin-right:24px;">
+            <div class="cart-details">
+                <h4>${product}</h4>
+                <p>Price: ₹${item.price}</p>
+                <p>Quantity: ${item.qty}</p>
+            </div>
+            <div class="cart-actions">
+                <button onclick="addToCart('${product}', ${item.price}, '${item.image}')">+</button>
+                <button onclick="removeFromCart('${product}')">-</button>
+                <button onclick="deleteFromCart('${product}')">Delete</button>
+            </div>
+        `;
+        cartItemsContainer.appendChild(li);
+    }
+}
 
 function closeCart() {
     document.getElementById('cart-modal').style.display = 'none';
 }
+
+document.querySelector('.cart').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('cart-modal').style.display = 'block';
+});
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById('cart-modal')) {
+        closeCart();
+    }
+}
+
+renderCart();
 </script>
