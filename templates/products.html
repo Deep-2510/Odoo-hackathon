@@ -16,20 +16,17 @@
     .submit-btn:hover { background-color: #444; }
   </style>
 </head>
-<nav class="bg-gray-900 p-4 flex justify-center space-x-6">
-    <a href="{{ url_for('dashboard') }}" class="text-gray-300 hover:text-white">Dashboard</a>
-    <a href="{{ url_for('products') }}" class="text-gray-300 hover:text-white">Products</a>
-    <a href="{{ url_for('my_listings') }}" class="text-gray-300 hover:text-white">My Listings</a>
-    <a href="{{ url_for('cart') }}" class="text-gray-300 hover:text-white">Cart</a>
-    <a href="{{ url_for('purchases') }}" class="text-gray-300 hover:text-white">Purchases</a>
-    <a href="{{ url_for('profile', user=user) }}" class="text-gray-300 hover:text-white">Profile</a>
-    <a href="{{ url_for('logout') }}" class="text-gray-300 hover:text-white">Logout</a>
-  </nav>
+
 <body class="flex items-center justify-center min-h-screen">
 
   <div class="form-container w-full max-w-lg p-8 rounded-lg shadow-lg m-4">
     <header class="flex justify-between items-center mb-8">
-      <h1 class="text-2xl font-bold">Logo</h1>
+      <nav class="bg-gray-900 p-4 flex justify-center space-x-6">
+    <a href="{{ url_for('dashboard') }}" class="text-gray-300 hover:text-white">Dashboard</a>
+    <a href="{{ url_for('products') }}" class="text-gray-300 hover:text-white">Products</a>
+    <a href="{{ url_for('purchases') }}" class="text-gray-300 hover:text-white">Purchases</a>
+    <a href="{{ url_for('profile', user=user) }}" class="text-gray-300 hover:text-white">Profile</a>
+    </nav>
     </header>
 
     <h2 class="text-xl mb-6">Add New Product</h2>
