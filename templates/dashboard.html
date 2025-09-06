@@ -6,6 +6,8 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -103,7 +105,7 @@
 
     <!-- Search Bar -->
     <div class="search-bar">
-      <input type="text" placeholder="Search products...">
+      <input id="search-input" class="awesomplete" data-list="laptop, tv, watch, microwave, table, chair, headphones, phone, camera, speaker" placeholder="Search products..." />
       <button><i class="fas fa-search"></i></button>
     </div>
 
@@ -115,27 +117,18 @@
             </div>
      
     </a>
-    <nav style="display: flex; align-items: center; background: #fff; padding: 16px;">
-    <!-- Other nav links ... -->
-    <div style="margin-left: auto; position: relative;">
-        <button id="menu-btn" style="background: none; border: none; cursor: pointer;">
-            <i class="fas fa-bars" style="font-size: 2rem; color: #232f3e;"></i>
-        </button>
-        <div id="menu-dropdown" style="display: none; position: absolute; right: 0; top: 40px; background: #fff; border: 1px solid #eee; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-width: 160px; z-index: 100;">
-           <a href="{{ url_for('dashboard') }} "style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;1">Dashboard</a>
-    <a href="{{ url_for('products') }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">Products</a>
-    <a href="{{ url_for('my_listings') }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">My Listings</a>
-    <a href="{{ url_for('purchases') }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">Purchases</a>
-    <a href="{{ url_for('profile', user=user) }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">Profile</a>
-    <a href="{{ url_for('logout') }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">Logout</a>
-  
-            </div>
-    </div>
-</nav>
   </header>
 
   <!-- Secondary Navigation -->
-  
+  <nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('products') }}">Products</a>
+    <a href="{{ url_for('my_listings') }}">My Listings</a>
+    <a href="{{ url_for('purchases') }}">Purchases</a>
+    <a href="{{ url_for('profile', user=user) }}">Profile</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    
+  </nav>
                 
             </div>
         </div>
@@ -174,32 +167,30 @@
                                 </a>
                                 
                             </div>
-                           <a href="{{ url_for('elec') }}" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
-    See More
-</a>
+                            <a href="{{ url_for('elec') }}">see more</a>
                         </div>  
                     </div>
                     
                     <!--create the box for offer section of items-->
                     <div class="box">
-                        <h3>Under ₹699|Amazon brands]</h3>
+                        <h3>Under ₹699|any product </h3>
                         <div class="box-a">
                             <div>
-                                <img src="/img/sari (1).jpg" alt="">
-                                <span>sarres</span>
+                                <img src="/static/KEY_BOARD/510OM8sOrkL._AC_UY218_.jpg" alt="">
+                                <span>Keyboard</span>
                             </div>
                             <div>
-                                <img src="/img/dress.jpg" alt="">
-                                <span>Dresses</span>
+                                <img src="/static/TV/71y65vihSiL._AC_UY218_.jpg" alt="">
+                                <span>desktop</span>
                             </div>
                             <div>
-                                <img src="/img/kutuas.jpg" alt="">
-                                <span>kurtas</span>
+                                <img src="/static/FRIDGE/61ZX+36YjmL._AC_UY218_.jpg" alt="">
+                                <span>FRIDGE</span>
 
                             </div>
                             <div>
-                                <img src="/img/sari (3).jpg" alt="">
-                                <span> trendy tops & dresses</span>
+                                <img src="/static/slider/51TJJNnBGeL._AC_SY200_.jpg" alt="">
+                                <span>PRESS</span>
                             </div>
                         </div>
                       
@@ -241,9 +232,7 @@
                         <div>
                             <img src="/static/watch/61ZtqtvoD2L._AC_UY327_FMwebp_QL65_.webp" alt="">
                         </div>
-                      <a href="{{ url_for('elec') }}" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
-    See More
-</a>
+                       <a href="{{ url_for('elec') }}">see more</a>
                         
                     </div>
 
@@ -252,9 +241,9 @@
                         <h3>Laptop and Accessories</h3>
                         <div>
                             <img src="/static/LAPTOP/71hC42cKbsL._AC_UY218_.jpg" alt="">
-                        <a href="{{ url_for('elec') }}" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
-    See More
-</a>
+                        </div>
+                        <a href="{{ url_for('elec') }}">see more</a>
+                     
                     </div>
 
                     <!--section of luggage bages-->
@@ -263,9 +252,7 @@
                         <div>
                             <img src="/STATIC/PHONES/81AyOlAxwuL._AC_UY218_.jpg" alt="">
                         </div>
-                       <a href="{{ url_for('elec') }}" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
-    See More
-</a>
+                        <a href="{{ url_for('elec') }}">see more</a>
                         
                     </div>
 
@@ -275,7 +262,7 @@
                         <div>
                             <img src="/static/GAMINGCHAIR/61G6l2K+pEL._AC_PT0_BL0_SX320_SY720_.jpg" alt="">
                         </div>
-                       <a href="{{ url_for('elec') }}" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
+                        <a href="/elec.html" style="display:inline-block; margin-top:12px; background:#232f3e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold;">
     See More
 </a>
                         
@@ -315,6 +302,7 @@
             <h3>Popular Products in Worldwide internationally</h3>
             <ul class="product-slide">
                 <li><img src="/static/EAR BUDS/51ptyuMXIeL._AC_UY218_.jpg" alt=""> </li> <!--1-->
+                
                 <li><img src="/static/FRIDGE/61fH8CRXjwL._AC_SR160,134_CB1169409_QL70_.jpg" alt=""> </li> <!--2-->
                 <li><img src="/static/GAMING CHAIR/51xQB18UucL._AC_UL320_.jpg" alt=""> </li> <!--3-->
                 <li><img src="/static/KEY_BOARD/61ZvJw9wlXL._AC_UY218_.jpg" alt=""> </li> <!--4-->
@@ -371,7 +359,7 @@
                 <!--product card price 1 laptop-->
                 <div class="product-img-container ">
                     
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/51+U6oOCx4L._SR480,440_.jpg" alt="">
+                    <img src="/static/LAPTOP/61S+iQmF5NL._AC_UL320_.jpg" alt="">
                 </div>
                 <div class="product-offer">
                     <p>20% off</p> <span>deal</span>
@@ -390,7 +378,7 @@
             <!--product card price 2 mobile-->
             <div class="product-card">
                 <div class="product-img-container">
-                    <img src="/static/MOUSE/51czxrySrVL._AC_UY218_.jpg" alt="">
+                    <img src="/static/GAMINGCHAIR/71RZxrqfhIL._AC_UL320_.jpg" alt="">
                 </div>
                 <div class="product-offer">
                     <p>25% off</p> <span>deal</span>
@@ -418,7 +406,7 @@
             <!--product card price 4 lagguage-->
             <div class="product-card">
                 <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/41gCVWVKI1L._SR480,440_.jpg" alt="">
+                    <img src="/static/LAPTOP/71bagLp2sXL._AC_UY218_.jpg" alt="">
                 </div>
                 <div class="product-offer">
                     <p>20% off</p> <span>deal</span>
@@ -432,7 +420,7 @@
             <!--product card price 5 mobile-->
             <div class="product-card">
                 <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/41kaS0VswaL._SR480,440_.jpg" alt="">
+                    <img src="/static/AC/41D8PibHJjL._AC_UY218_.jpg" alt="">
                 </div>
                 <div class="product-offer">
                     <p>35% off</p> <span>deal</span>
@@ -446,7 +434,7 @@
             <!--product card price 6 earbuds -->
             <div class="product-card">
                 <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/31hXqtvutdL._SR480,440_.jpg" alt="">
+                    <img src="/static/watch/81zSh9pyYhL._AC_UY327_FMwebp_QL65_.webp" alt="">
                 </div>
                 <div class="product-offer">
                     <p>20% off</p> <span>deal</span>
@@ -457,105 +445,8 @@
                 <button class="add-to-cart-btn" data-product="Product Name" data-price="5999">Add to Cart</button>
             </div>
 
-            <!--product card price 7  freige-->
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/51fbmWdbOfL._AC_SY200_.jpg" alt="">
-                </div>
-                <div class="product-offer">
-                    <p>15% off</p> <span>deal</span>
-                </div>
-                <span>₹57999</span>
-                <p class="product-price">  List Price:₹69999</p>
-                <h4>This is the best for you</h4>
-                <button class="add-to-cart-btn" data-product="Product Name" data-price="57999">Add to Cart</button>
-            </div>
+          
 
-            <!--product card price 8  ears buds-->
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="/static/LAPTOP/71FXHAM" alt="">
-                </div>
-                <div class="product-offer">
-                    <p>15% off</p> <span>deal</span>
-                </div>
-                <span>₹3999</span>
-                <p class="product-price">  List Price:₹4500</p>
-                <h4>This is the best for you</h4>
-                <button class="add-to-cart-btn" data-product="Product Name" data-price="3999">Add to Cart</button>
-            </div>
-
-            <!--product card price 9 -->
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/31IMJ+ymo-L._AC_SY200_.jpg" alt="">
-                </div>
-                <div class="product-offer">
-                    <p>35% off</p> <span>deal</span>
-                </div>
-                <span>₹1999</span>
-                <p class="product-price">  List Price:₹2500</p>
-                <h4>This is the best for you</h4>
-                <button class="add-to-cart-btn" data-product="Product Name" data-price="1999">Add to Cart</button>
-            </div>
-
-            <!--product card price 10x-->
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/61B8-nfHqlL._AC_SY200_.jpg" alt="">
-                </div>
-                <div class="product-offer">
-                    <p>20% off</p> <span>deal</span>
-                </div>
-                <span>₹5999</span>
-                <p class="product-price">  List Price:₹7500</p>
-                <h4>This is the best for you</h4>
-                <button class="add-to-cart-btn" data-product="Product Name" data-price="5999">Add to Cart</button>
-            </div>
-            <!--product card price 11x-->
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/31hXqtvutdL._SR480,440_.jpg" alt="">
-                </div>
-                <div class="product-offer">
-                    <p>20% off</p> <span>deal</span>
-                </div>
-                <span>₹5999</span>
-                <p class="product-price">  List Price:₹7500</p>
-                <h4>This is the best for you</h4>
-                <button class="add-to-cart-btn" data-product="Product Name" data-price="5999">Add to Cart</button>
-            </div>
-
-            <!--product card price 12-->
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="./amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/51fbmWdbOfL._AC_SY200_.jpg" alt="">
-                </div>
-                <div class="product-offer">
-                    <p>20% off</p> <span>deal</span>
-                </div>
-                <span>₹5999</span>
-                <p class="product-price">  List Price:₹7500</p>
-                <h4>This is the best for you</h4>
-                <button class="add-to-cart-btn" data-product="Product Name" data-price="5999">Add to Cart</button>
-            </div>
-
-            <!--product card price 13-->
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src=". /amazone/Online Shopping site in India_ Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in_files/7152-mn8mKL._AC_SY200_.jpg" alt="">
-                </div>
-                <div class="product-offer">
-                    <p>20% off</p> <span>deal</span>
-                </div>
-                <span>₹5999</span>
-                <p class="product-price">  List Price:₹7500</p>
-                <h4>This is the best for you</h4>
-                <button class="add-to-cart-btn" data-product="Product Name" data-price="5999">Add to Cart</button>
-            </div>
-
-
-        </div>
 
     </div>
 
@@ -694,16 +585,7 @@ window.onclick = function(event) {
 renderCart();
 </script>
 
-<nav style="display: flex; justify-content: flex-end; align-items: center; padding: 16px; background: #fff;">
-    <div style="position: relative;">
-        <button id="profile-btn" style="background: none; border: none; cursor: pointer;">
-            <i class="fas fa-user-circle" style="font-size: 2rem; color: #232f3e;"></i>
-        </button>
-        <div id="profile-dropdown" style="display: none; position: absolute; right: 0; top: 40px; background: #fff; border: 1px solid #eee; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-width: 120px; z-index: 100;">
-            <a href="{{ url_for('logout') }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">Logout</a>
-        </div>
-    </div>
-</nav>
+
 <script>
 document.getElementById('profile-btn').addEventListener('click', function() {
     const dropdown = document.getElementById('profile-dropdown');
