@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>My Listings</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f7eeff; margin: 0; }
+        .listing-container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 32px; }
+        .listing-title { font-size: 2rem; margin-bottom: 24px; text-align: center; }
+        .listing-list { list-style: none; padding: 0; margin: 0; }
+        .listing-item { display: flex; align-items: center; border-bottom: 1px solid #eee; padding: 16px 0; }
+        .listing-item img { width: 80px; height: 80px; object-fit: contain; border-radius: 6px; margin-right: 24px; background: #fafafa; border: 1px solid #eee; }
+        .listing-details { flex: 1; }
+        .listing-details h4 { margin: 0 0 8px 0; font-size: 1.1rem; }
+        .listing-details p { margin: 0 0 4px 0; color: #555; }
+        .empty-listing { text-align: center; color: #888; margin: 40px 0; }
+        .add-listing-form { margin-bottom: 32px; }
+        .add-listing-form input { margin-right: 8px; padding: 6px; }
+        .add-listing-form button { padding: 6px 12px; background: #232f3e; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+        .add-listing-form button:hover { background: #febd69; color: #232f3e; }
+    </style>
+</head>
+<body>
+    <div class="listing-container">
+        <div class="listing-title">My Listings</div>
+        <form class="add-listing-form" id="add-listing-form">
+            <input type="text" id="product-name" placeholder="Product Name" required>
+            <input type="number" id="product-price" placeholder="Price" required>
+            <input type="url" id="product-image" placeholder="Image URL" required>
+            <button type="submit">Add Listing</button>
+        </form>
+        <ul id="listing-items" class="listing-list"></ul>
+    </div>
+    <script>
+    function getListings() {
+        return JSON.parse(localStorage.getItem('mylistings')) || {};
+    }
+
+    function saveListings(listings) {
+        localStorage.setItem('mylistings', JSON.stringify(listings));
+    }
+
+    function renderListings() {
+        const listings = getListings();
+        const listingItems = document.getElementById('listing-items');
+        listingItems.innerHTML = '';
+        const products = Object.keys(listings);
+        if (products.length === 0) {
+            listingItems.innerHTML = '<div class="empty-listing">No listings yet.</div>';
+            return;
+        }
+        products.forEach(product => {
+            const item = listings[product];
+            const li = document.createElement('li');
+            li.className = 'listing-item';
+            li.innerHTML = `
+                <img src="${item.image}" alt="${product}">
+                <div class="listing-details">
+                    <h4>${product}</h4>
+                    <p>Price: ₹${item.price}</p>
+                </div>
+            `;
+            listingItems.appendChild(li);
+        });
+    }
+
+    renderListings();
+
+    document.getElementById('add-listing-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('product-name').value.trim();
+        const price = parseInt(document.getElementById('product-price').value);
+        const image = document.getElementById('product-image').value.trim();
+        if (name && price && image) {
+            let listings = getListings();
+            listings[name] = { price: price, image: image };
+            saveListings(listings);
+            renderListings();
+            // Optionally, add to dashboard products here
+            // localStorage.setItem('dashboardProducts', JSON.stringify(listings));
+            this.reset();
+        }
+    });
+
+    renderListings();
+    </script>
+</body>
+</html>

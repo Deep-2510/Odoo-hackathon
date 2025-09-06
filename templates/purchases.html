@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>My Purchases</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f7eeff; margin: 0; }
+        .purchase-container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 32px; }
+        .purchase-title { font-size: 2rem; margin-bottom: 24px; text-align: center; }
+        .purchase-list { list-style: none; padding: 0; margin: 0; }
+        .purchase-item { display: flex; align-items: center; border-bottom: 1px solid #eee; padding: 16px 0; }
+        .purchase-item img { width: 80px; height: 80px; object-fit: contain; border-radius: 6px; margin-right: 24px; background: #fafafa; border: 1px solid #eee; }
+        .purchase-details { flex: 1; }
+        .purchase-details h4 { margin: 0 0 8px 0; font-size: 1.1rem; }
+        .purchase-details p { margin: 0 0 4px 0; color: #555; }
+        .empty-purchase { text-align: center; color: #888; margin: 40px 0; }
+    </style>
+</head>
+<body>
+    <div class="purchase-container">
+        <div class="purchase-title">My Purchases</div>
+        <ul id="purchase-items" class="purchase-list"></ul>
+    </div>
+    <script>
+    function getPurchases() {
+        return JSON.parse(localStorage.getItem('purchases')) || {};
+    }
+
+    function renderPurchases() {
+        const purchases = getPurchases();
+        const purchaseItems = document.getElementById('purchase-items');
+        purchaseItems.innerHTML = '';
+        const products = Object.keys(purchases);
+        if (products.length === 0) {
+            purchaseItems.innerHTML = '<div class="empty-purchase">No purchases yet.</div>';
+            return;
+        }
+        products.forEach(product => {
+            const item = purchases[product];
+            const li = document.createElement('li');
+            li.className = 'purchase-item';
+            li.innerHTML = `
+                <img src="${item.image}" alt="${product}">
+                <div class="purchase-details">
+                    <h4>${product}</h4>
+                    <p>Price: ₹${item.price}</p>
+                    <p>Quantity: ${item.qty}</p>
+                </div>
+            `;
+            purchaseItems.appendChild(li);
+        });
+    }
+
+    renderPurchases();
+    </script>
+</body>
+</html>

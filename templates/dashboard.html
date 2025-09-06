@@ -675,3 +675,25 @@ window.onclick = function(event) {
 
 renderCart();
 </script>
+
+<nav style="display: flex; justify-content: flex-end; align-items: center; padding: 16px; background: #fff;">
+    <div style="position: relative;">
+        <button id="profile-btn" style="background: none; border: none; cursor: pointer;">
+            <i class="fas fa-user-circle" style="font-size: 2rem; color: #232f3e;"></i>
+        </button>
+        <div id="profile-dropdown" style="display: none; position: absolute; right: 0; top: 40px; background: #fff; border: 1px solid #eee; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-width: 120px; z-index: 100;">
+            <a href="{{ url_for('logout') }}" style="display: block; padding: 12px 16px; color: #232f3e; text-decoration: none;">Logout</a>
+        </div>
+    </div>
+</nav>
+<script>
+document.getElementById('profile-btn').addEventListener('click', function() {
+    const dropdown = document.getElementById('profile-dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+});
+window.addEventListener('click', function(e) {
+    if (!document.getElementById('profile-btn').contains(e.target)) {
+        document.getElementById('profile-dropdown').style.display = 'none';
+    }
+});
+</script>

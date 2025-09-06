@@ -71,6 +71,34 @@
         placeholder.textContent = 'Add product Image';
       }
     });
+function getListings() {
+    return JSON.parse(localStorage.getItem('mylistings')) || {};
+}
+
+function saveListings(listings) {
+    localStorage.setItem('mylistings', JSON.stringify(listings));
+}
+
+// Call this when a new product is added
+function addProductToListings(name, price, image) {
+    let listings = getListings();
+    listings[name] = { price: price, image: image };
+    saveListings(listings);
+}
+
+// Example: If you have a form with id="add-product-form"
+document.getElementById('add-product-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('product-name').value.trim();
+    const price = parseInt(document.getElementById('product-price').value);
+    const image = document.getElementById('product-image').value.trim();
+    if (name && price && image) {
+        addProductToListings(name, price, image);
+        // ...your existing code to add product to dashboard...
+        this.reset();
+    }
+});
+
   </script>
 
 </body>
